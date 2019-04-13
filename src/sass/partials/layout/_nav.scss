@@ -1,0 +1,80 @@
+.nav-menu {
+    background: url(./images/overlay.png) $nav-bg-color;
+    @include flexible (space-around, row, wrap);
+    // @include flexible ();
+
+    // display: flex;
+    // justify-content: space-around;
+    // flex-flow: row wrap;
+}
+
+.nav-item a {
+    display: block;
+    padding: 1.5em 2em;
+    font-size: 1.5rem;
+    &:hover,
+    &:focus {
+        color: $nav-fg-color;
+        background: rgba(188, 202, 206, 0.15);
+    }
+}
+
+.label {
+    display: none;
+    font-size: 2em;
+    position: fixed;
+    padding: 0.5em 1em 3em;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 10;
+    
+}
+
+.navbar>input[type="checkbox"] {
+    display: none;
+}
+
+@media (max-width: 700px) {
+
+    .nav-menu {
+        margin-top: 2em;
+        padding: 0;
+        position: relative;
+        display: none;
+
+    }
+    .nav-item {
+        width: 90vw;
+    }
+
+    .nav-item a {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+        text-align: center;
+    }
+    .nav-item a:first-child{
+        border-top: 1px solid rgba(255, 255, 255, 0.4);
+    }
+
+    .navbar {
+        @include flexible (space-around, column, wrap);
+        background: $nav-bg-color;
+        padding: 2em 1em;
+
+        & .label {
+            display: block;
+            color: $nav-fg-color;
+            
+        }
+
+        & input[type="checkbox"]:checked~.nav-menu {
+            @include flexible (space-around, column, wrap);
+            z-index: 10;
+        }
+
+        & input[type="checkbox"]:checked~.label {
+            color: $nav-bg-color-hover;
+        }
+    }
+}

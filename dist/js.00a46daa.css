@@ -1,0 +1,550 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,500);
+@import url("https://use.fontawesome.com/releases/v5.8.1/css/all.css");
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5,
+h6, p, blockquote, pre, a, abbr, acronym, address, big,
+cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small,
+strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt,
+dd, ol, ul, li, fieldset, form, label, legend, table, caption,
+tbody, tfoot, thead, tr, th, td, article, aside, canvas, details,
+embed, figure, figcaption, footer, header, hgroup, menu, nav,
+output, ruby, section, summary, time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  font-size: 100%;
+  vertical-align: baseline;
+  background: transparent;
+  box-sizing: border-box !important;
+}
+
+img, fieldset, a img {
+  border: none;
+}
+
+input[type=submit],
+button {
+  cursor: pointer;
+  padding: 0;
+  border: 0;
+}
+
+textarea {
+  overflow: auto;
+}
+
+input, button {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+input, textarea, select, button,
+h1, h2, h3, h4, h5, h6, a, span, a:focus {
+  outline: none;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+table {
+  border-spacing: 0;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.calc-body {
+  background: #ccc;
+  background-image: radial-gradient(50% 30% ellipse at center top, #800c04 0%, rgba(0, 0, 0, 0) 100%), radial-gradient(60% 50% ellipse at center bottom, #800c04 0%, #100a1c 100%);
+  background-attachment: fixed;
+  color: #6cacc5;
+  color: #6cacc5;
+  font: 300 18px/1.6 "Source Sans Pro", sans-serif;
+  margin: 0;
+  padding: 0em 0 2em;
+  text-align: center;
+}
+
+.calc-body h1 {
+  font-weight: 300;
+  margin: 0;
+}
+
+/* Gradient text only on Webkit */
+.warning {
+  background: -webkit-linear-gradient(45deg, #c97874 10%, #463042 90%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: #8c5059;
+  font-weight: 400;
+  margin: 0 auto 6em;
+  max-width: 9em;
+}
+
+.calculator {
+  font-size: 28px;
+  margin: 0 auto;
+  width: 10em;
+}
+.calculator::before, .calculator::after {
+  content: " ";
+  display: table;
+}
+.calculator::after {
+  clear: both;
+}
+
+/* Calculator after dividing by zero */
+.broken {
+  animation: broken 2s;
+  transform: translate3d(0, -2000px, 0);
+  opacity: 0;
+}
+
+.viewer {
+  color: #c97874;
+  float: left;
+  line-height: 3em;
+  text-align: right;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  width: 7.5em;
+  height: 3em;
+}
+
+.calculator button {
+  border: 0;
+  background: rgba(42, 50, 113, 0.28);
+  color: #6cacc5;
+  cursor: pointer;
+  float: left;
+  font: inherit;
+  margin: 0.25em;
+  width: 2em;
+  height: 2em;
+  transition: all 0.5s;
+}
+.calculator button:hover {
+  background: #201e40;
+}
+.calculator button:focus {
+  outline: 0;
+  /* The value fade-ins that appear */
+}
+.calculator button:focus::after {
+  animation: zoom 1s;
+  animation-iteration-count: 1;
+  animation-fill-mode: both;
+  content: attr(data-num);
+  cursor: default;
+  font-size: 100px;
+  position: absolute;
+  top: 1.5em;
+  left: 50%;
+  text-align: center;
+  margin-left: -24px;
+  opacity: 0;
+  width: 48px;
+}
+
+/* Same as above, modified for operators */
+.ops:focus::after {
+  content: attr(data-ops);
+  margin-left: -210px;
+  width: 420px;
+}
+
+/* Same as above, modified for result */
+.equals:focus::after {
+  content: attr(data-result);
+  margin-left: -300px;
+  width: 600px;
+}
+
+/* Reset button */
+.reset {
+  background: rgba(201, 120, 116, 0.28);
+  color: #c97874;
+  font-weight: 400;
+  margin-left: -77px;
+  padding: 0.5em 1em;
+  position: absolute;
+  top: -20em;
+  left: 50%;
+  width: auto;
+  height: auto;
+  /* When button is revealed */
+}
+.reset:hover {
+  background: #c97874;
+  color: #100a1c;
+}
+.reset.show {
+  top: 20em;
+  animation: fadein 4s;
+}
+
+/* Animations */
+/* Values that appear onclick */
+@keyframes zoom {
+  0% {
+    transform: scale(0.2);
+    opacity: 1;
+  }
+  70% {
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+  }
+}
+/* Division by zero animation */
+@keyframes broken {
+  0% {
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
+  }
+  5% {
+    transform: rotate(5deg);
+  }
+  15% {
+    transform: rotate(-5deg);
+  }
+  20% {
+    transform: rotate(5deg);
+  }
+  25% {
+    transform: rotate(-5deg);
+  }
+  50% {
+    transform: rotate(45deg);
+  }
+  70% {
+    transform: translate3d(0, 2000px, 0);
+    opacity: 1;
+  }
+  75% {
+    opacity: 0;
+  }
+  100% {
+    transform: translate3d(0, -2000px, 0);
+  }
+}
+/* Reset button fadein */
+@keyframes fadein {
+  0% {
+    top: 20em;
+    opacity: 0;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@media (min-width: 420px) {
+  .calculator {
+    width: 12em;
+  }
+
+  .viewer {
+    width: 8.5em;
+  }
+
+  button {
+    margin: 0.5em;
+  }
+}
+:root {
+  font-size: 71.42857%;
+}
+
+body {
+  color: #002e5b;
+  font-family: Roboto, sans-serif;
+  font-weight: normal;
+  font-size: 1.4em;
+  line-height: 1.4;
+}
+
+a {
+  text-decoration: none;
+  color: whitesmoke;
+  background: #002e5b;
+}
+
+/* container */
+.container {
+  width: 90%;
+  margin: 0 auto;
+}
+
+header.special {
+  position: relative;
+  text-align: center;
+  padding-top: 1em;
+  margin-bottom: 4em;
+}
+header.special h1 {
+  font-size: 2em;
+  margin-bottom: 0;
+}
+
+.nav-menu {
+  background: url(/overlay.b2a30f3f.png) #002e5b;
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.nav-item a {
+  display: block;
+  padding: 1.5em 2em;
+  font-size: 1.5rem;
+}
+.nav-item a:hover, .nav-item a:focus {
+  color: whitesmoke;
+  background: rgba(188, 202, 206, 0.15);
+}
+
+.label {
+  display: none;
+  font-size: 2em;
+  position: fixed;
+  padding: 0.5em 1em 3em;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 10;
+}
+
+.navbar > input[type=checkbox] {
+  display: none;
+}
+
+@media (max-width: 700px) {
+  .nav-menu {
+    margin-top: 2em;
+    padding: 0;
+    position: relative;
+    display: none;
+  }
+
+  .nav-item {
+    width: 90vw;
+  }
+
+  .nav-item a {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+    text-align: center;
+  }
+
+  .nav-item a:first-child {
+    border-top: 1px solid rgba(255, 255, 255, 0.4);
+  }
+
+  .navbar {
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+    flex-wrap: wrap;
+    background: #002e5b;
+    padding: 2em 1em;
+  }
+  .navbar .label {
+    display: block;
+    color: whitesmoke;
+  }
+  .navbar input[type=checkbox]:checked ~ .nav-menu {
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+    flex-wrap: wrap;
+    z-index: 10;
+  }
+  .navbar input[type=checkbox]:checked ~ .label {
+    color: #fed136;
+  }
+}
+.footer {
+  width: 100%;
+  font-size: 1.2em;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #002e5b;
+  text-align: center;
+  padding: 0;
+  border-top: 1px solid lightgrey;
+}
+.footer .footer-socials {
+  margin: 60px 0 20px;
+}
+.footer .footer-socials a {
+  display: inline-block;
+  background-color: #002e5b;
+  color: whitesmoke;
+  margin-right: 5px;
+  text-align: center;
+  padding-top: 0.3em;
+  font-size: 1.6em;
+  line-height: 50px;
+  width: 50px;
+  height: 50px;
+  -webkit-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+  border-radius: 50%;
+}
+.footer .footer-socials a:hover {
+  background-color: #fed136;
+  color: #002e5b;
+}
+.footer .footer-bottom {
+  padding: 10px 0 40px;
+}
+
+.box {
+  -webkit-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+  border-radius: 10px;
+}
+
+.grid-container {
+  margin: 1rem 0.5em;
+  display: grid;
+  grid-gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+.grid-container .grid-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.grid-container .grid-item img {
+  padding: 0;
+  max-width: 100%;
+}
+
+.product {
+  background-color: lightgrey;
+  text-align: center;
+  -webkit-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+  border-radius: 10px;
+  width: 250px;
+  height: 360px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: rgba(10, 18, 20, 0.54902) 0px 4px 13px 3px;
+}
+.product .product-name {
+  padding: 1.1em 0;
+  font-size: 1.4em;
+  color: #002e5b;
+  background-color: lightgrey;
+}
+.product .icon {
+  display: block;
+  font-size: 0.8em;
+}
+.product .icon .icon-background {
+  width: 80px;
+  height: 80px;
+  line-height: 80px;
+  border-top-left-radius: 10px;
+  background-color: #002e5b;
+  position: absolute;
+  top: 0px;
+  left: -40px;
+  transform: skewX(-45deg);
+}
+.product .icon .shopping-cart {
+  color: whitesmoke;
+  display: block;
+  position: absolute;
+  top: 8px;
+  left: 8px;
+}
+.product .icon .shopping-cart:hover {
+  color: #fed136;
+}
+
+.product-back {
+  width: 250px;
+  height: 360px;
+  -webkit-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+  border-radius: 10px;
+  background-color: lightgrey;
+  color: #EE3B24;
+  text-align: center;
+  margin: 0 auto;
+  position: relative;
+  overflow: hidden;
+  box-shadow: rgba(10, 18, 20, 0.54902) 0px 4px 13px 3px;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  z-index: -1;
+  top: -360px;
+  transform: rotateY(180deg);
+}
+
+.product-menu {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  flex-wrap: wrap;
+  height: 360px;
+  background-color: lightgrey;
+  color: #002e5b;
+  position: absolute;
+  top: 80%;
+  transition: all 0.7s;
+}
+
+.product-button, .product-price, .buy-now {
+  position: relative;
+  padding-top: 20px;
+  width: 50%;
+  color: #002e5b;
+  border-top: solid 1px rgba(10, 18, 20, 0.54902);
+}
+
+.product-price, .buy-now {
+  font-size: 1.5rem;
+}
+
+.buy-now {
+  border-left: solid 1px rgba(10, 18, 20, 0.54902);
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.buy-now:hover {
+  background-color: #fed136;
+  color: #002e5b;
+}
+
+.product-detail, .cancel, .add-to-cart, .how-many {
+  display: none;
+}
+
+.product-wrapper {
+  display: inline-block;
+  margin: 1em;
+  height: 360px;
+  transition: all 0.7s ease;
+  perspective: 300px;
+  transform-style: preserve-3d;
+}
+
+/*# sourceMappingURL=/js.00a46daa.css.map */

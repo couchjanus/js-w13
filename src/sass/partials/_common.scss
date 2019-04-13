@@ -1,0 +1,40 @@
+// common blocks
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,500);
+@import url("https://use.fontawesome.com/releases/v5.8.1/css/all.css");
+
+:root {
+	font-size: 71.42857%; 
+}
+body {
+    color: $primary-color;
+
+	font-family: Roboto,sans-serif;
+	font-weight: normal;
+	font-size: 1.4em;
+	line-height: 1.4;
+}
+
+a {
+	text-decoration: none;
+	color: $nav-fg-color;
+	background: $nav-bg-color;
+}
+
+/* container */
+
+.container {
+	width: 90%;
+	margin: 0 auto;
+}
+
+header.special {
+    position: relative;
+    text-align: center;
+    padding-top: 1em;
+    margin-bottom: 4em;
+
+	& h1 {
+		font-size: 2em;
+		margin-bottom: 0;
+	}
+}

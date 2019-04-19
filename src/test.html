@@ -1,3 +1,4 @@
+<!doctype html>
 <html>
 
 <head>
@@ -15,6 +16,7 @@
 		<label class='label' for="menu-trigger">
 			<i class="fas fa-bars"></i>
 		</label>
+		<span class="cart" id="cart-toggle"><i class="fas fa-cart-plus"></i></span>
 
 		<ul class="nav-menu">
 			<li class="nav-item"><a href="#">Home</a></li>
@@ -28,13 +30,62 @@
 		<span style="font-size: 48px; color: Dodgerblue;">
 			<i class="fas fa-igloo"></i>
 		</span>
-		<h1>Hello JavaScript!</h1>
+		<h1 id="hell">Hello JavaScript!</h1>
 	</header>
+
+	<div class="container">
+		<div id="main" class="card card-body">
+			<h2 class="title">Add Items</h2>
+			<form class="form-inline mb-3">
+				<input type="text" class="form-control mr-2">
+				<select class="form-control mr-2">
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+				</select>
+				<input type="submit" class="btn btn-dark" value="Submit">
+			</form>
+			<h2 class="title">Items</h2>
+			<ul id="items" class="list-group">
+				<li class="list-group-item">Item 1</li>
+				<li class="list-group-item">Item 2</li>
+				<li class="list-group-item">Item 3</li>
+				<li class="list-group-item">Item 4</li>
+			</ul>
+			<div id="output"></div>
+			<br>
+			<button class="btn btn-dark btn-block" id="button">Click Here</button>
+			<br>
+			<div id="box" style="width:400px;height:200px;background:#f4f4f4">
+				<h3>HELLO</h3>
+			</div>
+		</div>
+	</div>
+
+	<aside class="aside">
+		<!-- Aside Area Start -->
+		<header><a href="#0" class="toggle-sidebar">close</a></header>
+		<div id="cart-sidebar" class="cart--sidebar">
+			<h2>Cart</h2>
+			<!-- cart-items start-->
+			<ul class="cart-items">
+				
+			</ul>
+			<!-- cart-items end -->
+
+			<div class="cart-total">
+				<p>Total <span>$00.00</span></p>
+			</div> <!-- cart-total -->
+
+			<a href="#" class="checkout-button">Checkout</a>
+		</div> <!-- cart end -->
+		<!-- Aside Area end -->
+	</aside>
 
 	<!-- Main -->
 	<main id="main">
 
-    </main>
+	</main>
 	<!-- start section footer -->
 	<footer class="footer">
 		<div class="footer-socials">
@@ -52,6 +103,7 @@
 			<address>NAU, Kyiv, Ukraine </address>
 		</div>
 	</footer>
+	<div class="backdrop"></div>
 
 
 	<!-- End section footer -->

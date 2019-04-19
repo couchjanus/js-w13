@@ -1,113 +1,186 @@
 .product{
     background-color: $product-bg-color;
     text-align: center;
-    @include border-radius(10px);
-    width: 250px;
+    border-radius: 10px;
+    width: 240px;
     height: 360px;
     position: relative;
     overflow: hidden;
     box-shadow: $box-shadow;
 
     .product-name {
-        padding: 1.1em 0;
-        font-size: 1.4em;
+        padding: 1.2em 1em;
+        font-size: 1.2em;
         color: $primary-color;
+        transition: all .3s;
         background-color: $product-bg-color;
+    }
+
+    .product-menu {
+        width: 100%;
+        height: 360px;
+        position: absolute;
+        transition: all .7s;
+        top: 80%;
+        background-color: $product-bg-color;
+
+        .how-many {
+            clear: both;
+            width: 100%;
+            height: 72px;
+            line-height: 72px;
+            border-top: solid 1px $product-border-color;
+            border-bottom: solid 1px $product-border-color;
+        }
+
+        .product-price, .product-detail, .buy-now, .cancel, .add-to-cart {
+            display: inline-table;
+            position: relative;
+            margin: 0;
+            width: 48%;
+            height: 72px;
+            line-height: 72px;
+            font-size: 1.1rem;
+            color: $primary-color;
+            border-top: solid 1px $product-border-color;
+            transition: all .3s;
+        }
+
+        .buy-now, .product-detail {
+            border-left: solid 1px $product-border-color;
+            cursor: pointer;
+            float: right;
+            width: 50%;
+        }
+
+        .buy-now:hover, .product-detail:hover {
+            background-color: red;
+            color: white;
+        }
+
+        .product-detail{
+            display: none;
+        }
+
+        .cancel {
+            width: 50%;
+            background-color: red;
+            color: white;
+            float: left;
+            cursor: pointer;
+        }
+        
+        .cancel:hover {
+            background-color: white;
+            color: red;
+        }
+        
+        .add-to-cart {
+            width: 50%;
+            background-color: $product-bg-color;;
+            float: right;
+            cursor: pointer;
+        }
+        .add-to-cart:hover {
+            background-color: red;
+            color: white;
+        }
         
     }
 
-    .icon {
-        display: block;
-        font-size: 0.8em;
-
-        .icon-background {
-            width: 80px;
-            height: 80px;
-            line-height: 80px;
-            border-top-left-radius: 10px;
-            background-color: $primary-color;
-            position: absolute;
-            top: 0px;
-            left: -40px;
-            transform: skewX(-45deg);
-        }
-        .shopping-cart {
-            color: $nav-fg-color;
-            display: block;
-            position: absolute;
-            top: 8px;
-            left: 8px;
-            &:hover {
-                color: $hover-color;
-            }
+    .product-picture {
+        overflow:hidden;
+        top: 20%;
+        transition: all .3s;
+        img{
+            max-width:100%;
+            min-width: 240px;
+            margin-top:10px;
+            
         }
     }
+
+
 }
 
 .product-back {
-    width: 250px;
+    width: 240px;
     height: 360px;
-    @include border-radius(10px);
+    border-radius: 10px;
     background-color: $product-bg-color;
-    
     color: #EE3B24;
     text-align: center;
     margin: 0 auto;
     position: relative;
     overflow: hidden;
     box-shadow: $box-shadow;
-    
     backface-visibility: hidden;
-    -webkit-backface-visibility: hidden;
     z-index: -1;
     top: -360px;
     transform: rotateY(180deg);
 }
 
-.product-menu {
-    width: 100%;
-    @include flexible (space-between, row, wrap);
-    height: 360px;
-    background-color: $product-bg-color;
-    color: $primary-color;
-    position: absolute;
-    top: 80%;
-    transition: all .7s;
-}
-
-.product-button {
-    position: relative;
-    padding-top: 20px;
-    width: 50%;
-    color: $primary-color;
-    border-top: solid 1px $product-border-color;
-}
-
-.product-price, .buy-now {
-    font-size: 1.5rem;
-    @extend .product-button;
-}
-
-.buy-now {
-    @extend .product-button;
-    border-left: solid 1px $product-border-color;
-    cursor: pointer;
-    transition: all .3s;
-    &:hover {
-        background-color: $hover-color;
-        color: $primary-color;
-    }
-}
-
-.product-detail, .cancel, .add-to-cart, .how-many{
-    display: none;
-}
-
 .product-wrapper {
-    display: inline-block;
+    transition: all 0.7s ease;
+    display: block;
+    float: left;
     margin: 1em;
     height: 360px;
-    transition: all 0.7s ease;
-    perspective: 300px;
-    transform-style: preserve-3d;    
+    transform-style: preserve-3d;
+}
+
+
+.product .icon {
+    display: block;
+}
+
+.product .icon .icon-background {
+    width: 80px;
+    height: 80px;
+    line-height: 80px;
+    border-top-left-radius: 10px;
+    background-color: $nav-bg-color;
+    position: absolute;
+    top: 0px;
+    left: -40px;
+    transform: skewX(-45deg);
+}
+
+.product .icon .shopping-cart {
+    color: $nav-fg-color;
+    font-size: 1em;
+    display: block;
+    position: absolute;
+    top: 8px;
+    left: 8px;
+}
+
+.product .icon .shopping-cart:hover {
+    color: $hover-color;
+}
+
+.back-is-visible {
+	z-index: 10;
+}
+
+.minus,
+.plus {
+	background: #fff;
+	color: #ee3b24;
+    border: 1px solid #ee3b24;
+    width: 30px;
+    height: 30px;
+	border-radius: 50%;
+}
+.minus:hover,
+.plus:hover {
+	background: #ee3b24;
+	color: #fff;
+	border: 2px solid #fff;
+	border-radius: 50%;
+}
+.quantity {
+	text-align: center;
+	font-weight: 700;
+	border-radius: 10px;
 }

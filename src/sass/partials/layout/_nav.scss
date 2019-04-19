@@ -1,11 +1,6 @@
 .nav-menu {
     background: url(./images/overlay.png) $nav-bg-color;
     @include flexible (space-around, row, wrap);
-    // @include flexible ();
-
-    // display: flex;
-    // justify-content: space-around;
-    // flex-flow: row wrap;
 }
 
 .nav-item a {
@@ -34,6 +29,22 @@
 
 .navbar>input[type="checkbox"] {
     display: none;
+}
+
+.cart{
+    display: block;
+    font-size: 2em;
+    position: fixed;
+    padding: 0.5em 1em 3em;
+    top: 0;
+    bottom: 0;
+    right: 10px;
+    color: $nav-fg-color;
+    z-index: 150;
+
+    &:hover{
+        color: $hover-color;
+    }
 }
 
 @media (max-width: 700px) {

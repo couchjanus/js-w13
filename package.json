@@ -19,5 +19,8 @@
   "homepage": "https://github.com/couchjanus/js-w13#readme",
   "devDependencies": {
     "sass": "^1.18.0"
+  },
+  "dependencies": {
+    "jquery": "^3.4.0"
   }
 }

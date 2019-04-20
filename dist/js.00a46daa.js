@@ -191,141 +191,168 @@ module.hot.dispose(reloadCSS);
 module.hot.accept(reloadCSS);
 },{"./images/overlay.png":[["overlay.b2a30f3f.png","sass/images/overlay.png"],"sass/images/overlay.png"],"./images/delete-item.png":[["delete-item.ff1ffbcd.png","sass/images/delete-item.png"],"sass/images/delete-item.png"],"_css_loader":"../../../.nvm/versions/node/v11.13.0/lib/node_modules/parcel-bundler/src/builtins/css-loader.js"}],"js/test.js":[function(require,module,exports) {
 // test.js
-'use strict'; // document object
-// console.dir(document);
-// document object property
-// console.log(document.domain); // localhost
-// console.log(document.URL); // http://localhost:1234/
-// console.log(document.title); // Shopping cart
-// console.log(document.doctype); // <!DOCTYPE html>
-// console.log(document.head); // head
-// console.log(document.all); // HTMLAllCollection
-// document.all[27].textContent = "Hello DOM!";
-// console.log(document.images[0].src); // http://localhost:1234/cat3.06d0e916.jpg 
-// GETELEMENTBYID //
-// var hello = document.getElementById('hell');
-// hello.textContent = "Hello ID Element!";
-// hello.innerText = "Hello Inner Text!";
-// hello.innerHTML = "Hello Inner HTML!";
-// hello.style.backgroundColor = 'solid 3px indigo';
-// let cartToggle = document.getElementById("cart-toggle");
-// console.log(cartToggle);
-// GETELEMENTSBYCLASSNAME //
-// var items = document.getElementsByClassName('list-group-item');
-// console.log(items);
-// console.log(items[2]);
-// items[2].textContent = 'Hello Item 2';
-// items[2].style.fontWeight = 800;
-// items[2].style.backgroundColor = 'yellow';
-// Gives error
-//items.style.backgroundColor = '#f4f4f4';
-// for (let i = 0; i<items.length; i++) {
-//   items[i].style.backgroundColor = "#b0"+(3*i+"a")+"00";
+'use strict'; // Создание элементов массива возможно несколькими способами:
+// var earth = new Array(4); /* массив из 4-х элементов*/
+// earth[0] = "Earth";
+// earth[1] = "24 h";
+// earth[2] = 6378;
+// earth[3] = 365.25;
+// var earth = new Array("Earth", "24 h", 6378, 365.25);
+// var earth = new Array(); // пустой массив
+// var earth = []; // пустой массив
+// earth.xtype = "Solar";
+// earth.xday = "24 h";
+// earth.radius = 6378;
+// earth.period = 365.25;
+// var country = ["UK", "USA", "GB"];
+// Если вы указываете числа или значения true или false при определении массива, 
+// то тип переменной будет числовой или булев тип, а не строковый.
+// var arr = ['первый элемент', 'второй элемент'];
+// console.log(arr[0]); // напечатает 'первый элемент'
+// console.log(arr[1]); // напечатает 'второй элемент'
+// доступ к элементам массива в javaScript:
+// var mas = new Array(1, 25, 'Привет');
+// mas[0] = 'Пока';
+// mas[1] = 35;
+// Свойство массивов length взаимосвязано с числовыми свойствами.
+// var fruits = [];
+// fruits.push('банан', 'яблоко', 'персик');
+// console.log(fruits.length); // 3
+// Длина length – не количество элементов массива, а последний индекс + 1.
+// var arr = [];
+// arr[1000] = true;
+// console.log(arr.length); // 1001
+// При уменьшении length массив укорачивается.
+// var arr = [1, 2, 3, 4, 5];
+// arr.length = 2; // укоротить до 2 элементов
+// console.log(arr[3]);
+// arr.length = 5; // вернуть length обратно, как было
+// console.log(arr[3]); // undefined: значения не вернулись
+//   Массивы в JavaScript индексируются с нуля: первый элемент массива имеет индекс, равный 0, а индекс последнего элемента равен значению свойства массива length минус 1.
+// var arr = ['первый элемент', 'второй элемент'];
+// console.log(arr[0]); // напечатает 'первый элемент'
+// console.log(arr[1]); // напечатает 'второй элемент'
+// console.log(arr[arr.length - 1]); // напечатает 'второй элемент'
+// Удаление элементов массива
+// в javascript удалить элемент массива можно при помощи оператора delete:
+// var myColors = new Array("red", "green", "blue");
+// delete myColors[1];
+// console.log(myColors); // red,,blue
+// Самый простой способ очистить массив - это arr.length=0.
+// вывести элементы массива на экран, в качестве конечного значения счетчика цикла использовать свойство length
+// for (var i = 0; i < arr.length; i++) {
+//     console.log(arr[i]);
 // }
-// GETELEMENTSBYTAGNAME //
-// var li = document.getElementsByTagName('li');
-// console.log(li);
-// console.log(li[1]);
-// li[1].textContent = 'Hello 2';
-// li[1].style.fontWeight = 'bold';
-// li[1].style.backgroundColor = 'yellow';
-// for(var i = 0; i < li.length; i++){
-//   li[i].style.backgroundColor = '#0f0';
+// console.log(arr.length);
+// вывод элементов массива с использованием обычного цикла for:
+// var mas = new Array(1, 25, 'Привет');
+// mas[0] = 'Пока';
+// mas[1] = 35;
+// function showElement() {
+//     for (i = 0; i < 3; i++) {
+//         console.log(mas[i]);
+//     }
 // }
-// QUERYSELECTOR //
-// var header = document.querySelector('.special');
-// header.style.borderBottom = 'solid 4px #c00';
-// var input = document.querySelector('input');
-// input.value = 'Hello World'
-// var submit = document.querySelector('input[type="submit"]');
-// submit.value="SEND"
-// var item = document.querySelector('.list-group-item');
-// item.style.color = 'red';
-// var lastItem = document.querySelector('.list-group-item:last-child');
-// lastItem.style.color = 'blue';
-// var secondItem = document.querySelector('.list-group-item:nth-child(2)');
-// secondItem.style.color = 'coral';
-// QUERYSELECTORALL //
-// var titles = document.querySelectorAll('.title');
-// console.log(titles);
-// titles[0].textContent = 'Hello';
-// var odd = document.querySelectorAll('li:nth-child(odd)');
-// var even= document.querySelectorAll('li:nth-child(even)');
-// for(var i = 0; i < odd.length; i++){
-//   odd[i].style.backgroundColor = '#f4f4f4';
-//   even[i].style.backgroundColor = '#ccc';
+// showElement();
+// использование цикла for in для перебора элементов массива:
+// function showElement() {
+//     for (var i in mas) {
+//         console.log(mas[i]);
+//     }
 // }
-// EVENTS //
-// var button = document.getElementById('button').addEventListener('click', buttonClick);
+// showElement();
+// перебор элементов массива buy:
 
-function buttonClick(e) {
-  console.log('Button clicked'); // document.getElementById('hell').textContent = 'Changed';
-  // document.querySelector('#main').style.backgroundColor = '#f4f';
-  // console.log(e);
-  // console.log(e.target);
-  // console.log(e.target.id);
-  // console.log(e.target.className);
-  // console.log(e.target.classList);
-  // var output = document.getElementById('output');
-  // output.innerHTML = '<h3>'+e.target.id+'</h3>';
-  // console.log(e.type);
-  // console.log(e.clientX);
-  // console.log(e.clientY);
-  // console.log(e.offsetX);
-  // console.log(e.offsetY);
-  // console.log(e.altKey);
-  // console.log(e.ctrlKey);
-  // console.log(e.shiftKey);
-} // 
-// function messageShow() {
-//   alert('Документ и все ресурсы загружены!');
+var buy = document.getElementsByClassName('buy-now'); // console.log('buy.length = ', buy.length);
+// for (let i = 0; i < buy.length; i++) {
+//     console.log(buy[i]);
 // }
-// window.onload = function() {
-//   messageShow();
-// };
-// document.addEventListener("DOMContentLoaded", function(){
-//     console.log('Документ и все ресурсы загружены!');
-// }, false);
-// window.onbeforeunload = function () {
-//   return "Точно перейти? И куда же ты собрался?";
-// };
-// (function(){
-//     console.log('Документ и все ресурсы загружены!');
-// })();
-
-
-var button = document.getElementById('button'); // var box = document.getElementById('box');
-// button.addEventListener('click', runEvent);
-// button.addEventListener('dblclick', runEvent);
-// button.addEventListener('mousedown', runEvent);
-// button.addEventListener('mouseup', runEvent);
-// box.addEventListener('mouseenter', runEvent);
-// box.addEventListener('mouseleave', runEvent);
-// box.addEventListener('mouseover', runEvent);
-// box.addEventListener('mouseout', runEvent);
-// box.addEventListener('mousemove', runEvent);
-// var itemInput = document.querySelector('input[type="text"]');
-// var form = document.querySelector('form');
-// var select = document.querySelector('select');
-// itemInput.addEventListener('keydown', runEvent);
-// itemInput.addEventListener('keyup', runEvent);
-// itemInput.addEventListener('keypress', runEvent);
-// itemInput.addEventListener('focus', runEvent);
-// itemInput.addEventListener('blur', runEvent);
-// itemInput.addEventListener('cut', runEvent);
-// itemInput.addEventListener('paste', runEvent);
-// itemInput.addEventListener('input', runEvent);
-// select.addEventListener('change', runEvent);
-// select.addEventListener('input', runEvent);
-// form.addEventListener('submit', runEvent);
-// function runEvent(e){
-//   e.preventDefault();
-//   console.log('EVENT TYPE: '+e.type);
-//   console.log(e.target.value);
-//   document.getElementById('output').innerHTML = '<h3>'+e.target.value+'</h3>';
-//   output.innerHTML = '<h3>MouseX: '+e.offsetX+' </h3><h3>MouseY: '+e.offsetY+'</h3>';
-//   document.body.style.backgroundColor = "rgb("+e.offsetX+","+e.offsetY+", 40)";
+// for (let i = 0; i < buy.length; i++) {
+//     buy[i].addEventListener('click', function (e) {
+//         console.log(e);
+//     });
 // }
+// for (let i = 0; i < buy.length; i++) {
+//     buy[i].addEventListener('click', function (e) {
+//         console.log(e.target);
+//         e.target.style.display = 'none';
+//     });
+// }
+// for (let i = 0; i < buy.length; i++) {
+//     buy[i].addEventListener('click', function (e) {
+//         document.querySelector('.product .product-name').style.display = 'none';
+//         document.querySelector('.product .icon').style.display = 'none';
+//         e.target.style.display = 'none';
+//         document.querySelector('.product .product-detail').style.display = 'block';
+//         document.querySelector('.product-menu').style.top = '40%';
+//     });
+// }
+// Свойство parentNode
+// for (let i = 0; i < buy.length; i++) {
+//     buy[i].addEventListener('click', function (e) {
+//         console.log(e.target.parentNode);
+//         e.target.style.display = 'none';
+//     });
+// }
+// for (let i=0; i<buy.length; i++ ) {
+//  buy[i].addEventListener('click', function (e) {
+//    console.log(e.target.parentNode);
+//    e.target.parentNode.parentNode.querySelector('.product .product-name').style.display = 'none';
+//    e.target.parentNode.parentNode.querySelector('.product .icon').style.display = 'none';
+//    e.target.style.display = 'none';
+//    e.target.parentNode.parentNode.querySelector('.product .product-detail').style.display = 'block';
+//    e.target.parentNode.parentNode.querySelector('.product-menu').style.top = '40%';
+//  });
+// }
+// for (let i=0; i<buy.length; i++ ) {
+//     buy[i].addEventListener('click', function (e) {
+//       console.log(e.target.parentNode);
+//       e.target.parentNode.parentNode.querySelector('.product .product-name').style.display = 'none';
+//       e.target.parentNode.parentNode.querySelector('.product .icon').style.display = 'none';
+//       e.target.style.display = 'none';
+//       e.target.parentNode.parentNode.querySelector('.product .product-detail').style.display = 'block';
+//       e.target.parentNode.style.top = '40%';
+//     });
+// }
+// Свойство childNodes - представление дочерних узлов.
+// var el = document.getElementsByClassName('product-menu').childNodes;
+// console.log(el);
+// for (let i=0; i<buy.length; i++ ) {
+//     buy[i].addEventListener('click', function (e) {
+//       console.log(e.target.parentNode);
+//       console.log(e.target.parentNode.childNodes); // length: 13
+//       console.log(e.target.parentNode.childElementCount); // 6
+//     });
+// }
+// Свойство Node.children возвращает коллекцию (HTMLCollection) дочерних элементов узла.
+// for (let i=0; i<buy.length; i++ ) {
+//     buy[i].addEventListener('click', function (e) {
+//       console.log(e.target.parentNode);
+//       console.log(e.target.parentNode.children); // length: 13
+//       console.log(e.target.parentNode.childElementCount); // 6
+//     });
+// }
+// for (let i=0; i<buy.length; i++ ) {
+//     buy[i].addEventListener('click', function (e) {
+//         console.log(e.target.parentNode);
+//         console.log(e.target.parentNode.children[2]);
+//         console.log(e.target.parentNode.querySelector('.product-detail'));
+//         console.log(e.target.parentNode.parentNode.querySelector('.product-name'));
+//         console.log(e.target.parentNode.parentNode.querySelector('.icon'));
+//     });
+// }
+// firstChild - первый дочерний узел элемента,
+// var el = document.getElementById('nav').firstChild;
+// console.log(el);
+// lastChild - последний дочерний узел.
+// el = document.getElementById('nav').lastChild;
+// console.log(el);
+// nextSibling - узел после элемента,
+// var el = document.getElementById('nav').nextSibling;
+// console.log(el);
+// previousSibling - узел до элемента.
+// el = document.getElementById('nav').previousSibling;
+// console.log(el);
 },{}],"js/index.js":[function(require,module,exports) {
 "use strict";
 
@@ -360,7 +387,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "41337" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "35645" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

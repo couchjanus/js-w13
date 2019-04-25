@@ -2,26 +2,26 @@
     box-shadow: 2px 0 10px 0 rgba(0, 0, 0, 0.3);
     -webkit-transform: translateX(100%);
     transform: translateX(100%);
-    z-index: 555;
+    z-index: 10;
     transition: 0.5s all cubic-bezier(0, 0.92, 1, 1);
     background-color: #fff;
-    position: fixed;
+    position: absolute;
     width: 300px;
     top: 0;
     bottom: 0;
-    right: 0;
+    right: 0px;
     min-height: 100vh;
     visibility: hidden;
 }
 
 .aside.open {
     visibility: visible;
-    -webkit-transform: translateX(-5px);
-    transform: translateX(-5px);
+    -webkit-transform: translateX(-0px);
+    transform: translateX(-0px);
 }
 
 .aside header {
-    z-index: 550;
+    z-index: 5;
     padding: 15px;
     background-color: #fff;
     box-shadow: 0 2px 15px rgba(0, 0, 0, 0.2);
@@ -69,7 +69,7 @@
     top: 0;
     left: 0;
     background-color: rgba(0, 20, 60, 0.9);
-    z-index: 554;
+    z-index: 5;
     visibility: hidden;
     opacity: 0;
     transition: 0.3s all;
@@ -85,7 +85,7 @@
 	padding: 0px 0 5px 90px;
 	height: 80px;
 	width: 250px;
-	margin-left: -40px;
+	margin-left: -0px;
 	position:relative;
 	background:#fff;
     transition: all 1000ms ease-out;

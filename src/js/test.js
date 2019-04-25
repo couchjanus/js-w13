@@ -89,6 +89,132 @@
 // }
 // showElement();
 
+// var child = document.createElement("h2");
+// var childText = document.createTextNode("Hello Element!");
+
+// appendChild - Добавляет элемент в конец списка дочерних элементов родителя. 
+// child.appendChild(childText);
+
+// Вставляемый узел становится последним в списке дочерних узлов элемента.
+
+// var childElement = document.querySelector('#box').appendChild(child);
+
+// var div = document.createElement('div');
+// var Html = '<h2>Вставляемый узел</h2> становится последним в списке дочерних узлов элемента.';
+// div.innerHTML = Html;
+
+// document.querySelector('#box').appendChild(div);
+
+// var aOne = document.createElement('a');
+// aOne.href = "http://google.com"
+// aOne.innerText = "Goodling!"
+// document.querySelector('#box').appendChild(aOne);
+// ==============================================
+var element = document.createElement("article");
+
+element.innerHTML = "<h2>Вставка в самое начало родителя, то есть перед первым узлом!</h2>";
+var parent = document.querySelector('#box');
+// Вставка в самое начало родителя, то есть перед первым узлом
+// parent.insertBefore(element, parent.firstChild);
+
+// ================================================
+// Вставка в конец родителя, аналогично appendChild()
+
+var element = document.createElement("article");
+
+// element.innerHTML = "<h2>Вставка в конец родителя, аналогично appendChild()!</h2>";
+// parent.insertBefore(element, null);
+
+
+// Вставка перед конкретным элементом parentChild
+element.innerHTML = "<h2>Вставка перед конкретным элементом parentChild!</h2>";
+var parentChild = document.querySelector('#box h3');
+
+parent.insertBefore(element, parentChild);
+
+
+// Вставка после конкретного элемента parentItem
+// здесь происходит вставка перед тем узлом, который находится сразу за узлом parentChild
+
+var parentItems = document.querySelector('#items');
+var parentItem = parentItems.firstElementChild;
+parentItems.insertBefore(element, parentItem.nextSibling);
+
+// =====================================
+// Создаем новый пустой элемент
+var sp1 = document.createElement("span");
+
+// Присваиваем ему id 'newSpan'
+sp1.setAttribute("id", "newSpan");
+
+// Создаем строку.
+var sp1_content = document.createTextNode("New replacement span element.");
+
+// Добавляем контент в созданный нами узел
+sp1.appendChild(sp1_content);
+
+// создаем ссылку на элемент который будем заменять
+var sp2 = document.querySelector('.footer-socials');
+var parentDiv = sp2.parentNode;
+
+// заменяем существующий элемент sp2 на созданный нами sp1
+// parentDiv.replaceChild(sp1, sp2);
+
+// ==============================================
+// добавляем новый элемент
+var list = document.querySelector('.footer-socials');
+
+list.insertAdjacentHTML('beforeend', '<a href="#"><i class="fab fa-github"></i></a>');
+
+
+// let table = document.createElement('table');
+// let tr = document.createElement('tr');
+// let td = document.createElement('td');
+// td.textContent = 'Data Cell 1';
+// tr.appendChild(td);
+// table.appendChild(tr);
+// output.appendChild(table);
+
+
+// var input = document.querySelector('input[type="text"]');
+// var submit = document.querySelector('.form-inline input[type="submit"]');
+// var ul = document.getElementById('items');
+
+// submit.addEventListener('click', function(e){
+//     e.preventDefault();
+//     let li = document.createElement('li');
+//     let liText = document.createTextNode('New item');
+//     li.appendChild(liText);
+//     ul.appendChild(li);
+
+// });
+
+// submit.addEventListener('click', function(e){
+//     e.preventDefault();
+//     let li = document.createElement('li');
+//     li.textContent = input.value;
+//     ul.appendChild(li);
+// });
+// ==============Шаблоны в HTML-коде===============
+var templateSource = document.getElementById("template-item").innerHTML;   
+var templateSource = document.getElementById("template-item").innerHTML;      
+
+var article = document.createElement("article");
+article.innerHTML = document.getElementById("template-item").innerHTML;
+document.querySelector('.footer').appendChild(article);
+
+// ==============HTML элемент template =================
+
+// let template =  document.getElementById("cells-to-repeat").innerHTML;
+// document.querySelector('.table-row').append(template);
+
+// Клонирование узлов копирует все атрибуты и их значения.
+let el = document.getElementById("cells-to-repeat");
+// let e = el.cloneNode(true);
+// console.log(e.content);
+// document.querySelector('.table-row').append(e.content);
+document.querySelector('.table-row').append(document.importNode(el.content, true));
+
 
 // использование цикла for in для перебора элементов массива:
 
@@ -100,119 +226,160 @@
 // showElement();
 
 
-// перебор элементов массива buy:
-var buy = document.getElementsByClassName('buy-now');
-
-// console.log('buy.length = ', buy.length);
-
-// for (let i = 0; i < buy.length; i++) {
-//     console.log(buy[i]);
+// var obj = {a:1, b:2, c:3};
+// for (var key in obj) {
+//   console.log("obj." + key + " = " + obj[key]);
 // }
 
-// for (let i = 0; i < buy.length; i++) {
-//     buy[i].addEventListener('click', function (e) {
-//         console.log(e);
-//     });
+// Вы также можете использовать for… in для итерации по значениям индекса итерируемого типа массива или строки:
+
+// let str = 'Turn the page';
+
+// for (let index in str) {
+//   console.log(`Index of ${str[index]}: ${index}`);
+// }
+// let str = 'Turn the page';
+//    var counter = 0;
+//    for (var key in str) {
+//      counter++;
+//    }
+
+
+//    const product = {
+//     id: 0,
+//     name: "Really Cool Cat",
+//     price: 177,
+//     picture: "cat3.jpg",
+//  };
+//  product.description = "Really Cool Cat";
+//  // порядок перебора соответствует порядку присвоения свойства
+//  for (var prop in product) {
+//     console.log( prop ); // id, name, price, picture, description
+//  }
+
+//  var users = {
+//     "9": 'Gertrude',
+//     "3": 'Henry',
+//     "1": 'Melvin'
+//   };
+
+//   for (var key in users) console.log( key ); // 1, 3, 9
+
+//   var usersPlus = {
+//     "+9": 'Gertrude',
+//     "+3": 'Henry',
+//     "+1": 'Melvin' };
+//   for (var key in usersPlus) {
+//     var value = usersPlus[key];
+//     key = +key; // ..если нужно именно число, преобразуем: "+1" -> 1
+//     alert( key + ": " + value ); // 9, 3, 1 во всех браузерах
+//   }
+
+//   let animals = ['🐔', '🐷', '🐑', '🐇'];
+//   let names = ['Gertrude', 'Henry', 'Melvin', 'Billy Bob'];
+
+//   for (let animal of animals) {
+//     // Random name for our animal
+//     let nameIdx = Math.floor(Math.random() * names.length);
+
+//     console.log(`${names[nameIdx]} the ${animal}`);
+//   }
+
+// Строки также являются итеративным типом, поэтому вы можете использовать for…of для строк
+
+// let str = 'abcde';
+
+// for (let char of str) {
+//   console.log(char.toUpperCase().repeat(3));
 // }
 
-
-// for (let i = 0; i < buy.length; i++) {
-//     buy[i].addEventListener('click', function (e) {
-//         console.log(e.target);
-//         e.target.style.display = 'none';
-//     });
-// }
-
-
-// for (let i = 0; i < buy.length; i++) {
-//     buy[i].addEventListener('click', function (e) {
-//         document.querySelector('.product .product-name').style.display = 'none';
-//         document.querySelector('.product .icon').style.display = 'none';
-//         e.target.style.display = 'none';
-//         document.querySelector('.product .product-detail').style.display = 'block';
-//         document.querySelector('.product-menu').style.top = '40%';
-//     });
-// }
-
-// Свойство parentNode
-
-// for (let i = 0; i < buy.length; i++) {
-//     buy[i].addEventListener('click', function (e) {
-//         console.log(e.target.parentNode);
-//         e.target.style.display = 'none';
-//     });
-// }
-
-// for (let i=0; i<buy.length; i++ ) {
-//  buy[i].addEventListener('click', function (e) {
-//    console.log(e.target.parentNode);
-//    e.target.parentNode.parentNode.querySelector('.product .product-name').style.display = 'none';
-//    e.target.parentNode.parentNode.querySelector('.product .icon').style.display = 'none';
-//    e.target.style.display = 'none';
-//    e.target.parentNode.parentNode.querySelector('.product .product-detail').style.display = 'block';
-//    e.target.parentNode.parentNode.querySelector('.product-menu').style.top = '40%';
-//  });
-// }
-
-
-// for (let i=0; i<buy.length; i++ ) {
-//     buy[i].addEventListener('click', function (e) {
-//       console.log(e.target.parentNode);
-//       e.target.parentNode.parentNode.querySelector('.product .product-name').style.display = 'none';
-//       e.target.parentNode.parentNode.querySelector('.product .icon').style.display = 'none';
-//       e.target.style.display = 'none';
-//       e.target.parentNode.parentNode.querySelector('.product .product-detail').style.display = 'block';
-//       e.target.parentNode.style.top = '40%';
-//     });
-// }
-
-
-// Свойство childNodes - представление дочерних узлов.
-// var el = document.getElementsByClassName('product-menu').childNodes;
-// console.log(el);
-
-// for (let i=0; i<buy.length; i++ ) {
-//     buy[i].addEventListener('click', function (e) {
-//       console.log(e.target.parentNode);
-//       console.log(e.target.parentNode.childNodes); // length: 13
-//       console.log(e.target.parentNode.childElementCount); // 6
-//     });
-// }
-
-// Свойство Node.children возвращает коллекцию (HTMLCollection) дочерних элементов узла.
-
-// for (let i=0; i<buy.length; i++ ) {
-//     buy[i].addEventListener('click', function (e) {
-//       console.log(e.target.parentNode);
-//       console.log(e.target.parentNode.children); // length: 13
-//       console.log(e.target.parentNode.childElementCount); // 6
-//     });
+// const product = {
+//     id: 0,
+//     name: "Cool Cat",
+//     price: 177,
+//     picture: "cat1.jpg",
+//     description: "Lorem ipsum dolor sit amet, consectetur elit."
+// };
+// for (let key in product) { 
+// console.log(key + ': ' + product[key]);
 // }
 
 
-// for (let i=0; i<buy.length; i++ ) {
-//     buy[i].addEventListener('click', function (e) {
-//         console.log(e.target.parentNode);
-//         console.log(e.target.parentNode.children[2]);
-//         console.log(e.target.parentNode.querySelector('.product-detail'));
-//         console.log(e.target.parentNode.parentNode.querySelector('.product-name'));
-//         console.log(e.target.parentNode.parentNode.querySelector('.icon'));
-//     });
-// }
+// // Почему нельзя использовать форму obj.key?  Используя такую запись вы подразумеваете, что хотите получить значение свойства key итерируемого объекта, а не значение соответствующее данному ключу.
 
-// firstChild - первый дочерний узел элемента,
-// var el = document.getElementById('nav').firstChild;
-// console.log(el);
 
-// lastChild - последний дочерний узел.
-// el = document.getElementById('nav').lastChild;
-// console.log(el);
+// for (let key in product) {
+//            console.log(key + ': ' + product.key);
+//  }
 
-// nextSibling - узел после элемента,
-// var el = document.getElementById('nav').nextSibling;
-// console.log(el);
+// // Метод Object.keys()
 
-// previousSibling - узел до элемента.
+//  console.log(Object.keys(data));
+//  // консоль: Array(8) [ "0", "1", "2", "3", "4", "5", "6", "7" ]
 
-// el = document.getElementById('nav').previousSibling;
-// console.log(el);
+ // Массивоподобный объект
+//  console.log(Object.keys(data[1]));
+//  // консоль: Array(5) [ "id", "name", "price", "image", "description" ]
+
+
+// Массивоподобный объект со случайным порядком ключей
+
+//        var an_obj = { 100: 'a', 2: 'b', 7: 'c' };
+
+//        console.log(Object.keys(an_obj)); // консоль: ['2', '7', '100']
+
+// Свойство getFoo является не перечисляемым свойством
+//        var my_obj = Object.create({}, { 
+//         getFoo: { 
+//         value: function() { return this.foo; } 
+//         } 
+//         });
+//                my_obj.foo = 1;
+//                console.log(Object.keys(my_obj)); // консоль: ['foo']
+        
+      
+//                const $template = document.getElementById("productItem").content;  
+
+//                for (var i=0; i<Object.keys(data).length; i++)  {
+//                          document.querySelector('.main')
+//                .append(makeProductItem($template, data[i])
+//                .cloneNode(true));
+//                }
+            
+              
+
+// Метод forEach(callback[, thisObject]) выполняет callback-функцию по каждому элементу массива.
+
+//                var a = ['a', 'b', 'c'];
+// выводит в консоль каждый элемент массива по порядку
+//                a.forEach(function(element) { 
+//                console.log(element);
+//                } );
+            
+            
+              
+              
+//                var colors = ['red', 'green', 'blue'];
+
+//                colors.forEach(function(color) {
+//                 console.log(color);
+//                });
+              
+// Как вариант, вы можете сократить код программы, используя стрелочные функции из ES6:
+
+//                var colors = ['red', 'green', 'blue'];
+              
+//                colors.forEach(
+//                color => console.log(color)
+//                );
+              
+              
+              
+// Метод slice(start_index, upto_index) возвращает секцию массива как новый массив.
+
+//                var sliceArray = new Array ("a", "b", "c", "d", "e");
+//                     sliceArray = sliceArray.slice(1, 4);
+//                     // начиная с индекса 1 извлекаются элементы
+//                     // вплоть до индекса 3
+//                     console.log(sliceArray);
+//                     // sliceArray = [ "b", "c", "d"]

@@ -293,6 +293,12 @@ header.special h1 {
   margin-bottom: 0;
 }
 
+#main-content {
+  width: 100%;
+  display: block;
+  position: relative;
+}
+
 .nav-menu {
   background: url(/overlay.b2a30f3f.png) #002e5b;
   display: flex;
@@ -336,7 +342,7 @@ header.special h1 {
   bottom: 0;
   right: 10px;
   color: whitesmoke;
-  z-index: 150;
+  z-index: 5;
 }
 .cart:hover {
   color: #fed136;
@@ -445,6 +451,15 @@ header.special h1 {
 .grid-container .grid-item img {
   padding: 0;
   max-width: 100%;
+}
+
+.main {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-gap: 10px;
+  grid-auto-rows: minmax(250px, auto);
+  grid-auto-flow: dense;
+  padding: 10px;
 }
 
 .product {
@@ -624,26 +639,26 @@ header.special h1 {
   box-shadow: 2px 0 10px 0 rgba(0, 0, 0, 0.3);
   -webkit-transform: translateX(100%);
   transform: translateX(100%);
-  z-index: 555;
+  z-index: 10;
   transition: 0.5s all cubic-bezier(0, 0.92, 1, 1);
   background-color: #fff;
-  position: fixed;
+  position: absolute;
   width: 300px;
   top: 0;
   bottom: 0;
-  right: 0;
+  right: 0px;
   min-height: 100vh;
   visibility: hidden;
 }
 
 .aside.open {
   visibility: visible;
-  -webkit-transform: translateX(-5px);
-  transform: translateX(-5px);
+  -webkit-transform: translateX(0px);
+  transform: translateX(0px);
 }
 
 .aside header {
-  z-index: 550;
+  z-index: 5;
   padding: 15px;
   background-color: #fff;
   box-shadow: 0 2px 15px rgba(0, 0, 0, 0.2);
@@ -690,7 +705,7 @@ header.special h1 {
   top: 0;
   left: 0;
   background-color: rgba(0, 20, 60, 0.9);
-  z-index: 554;
+  z-index: 5;
   visibility: hidden;
   opacity: 0;
   transition: 0.3s all;
@@ -705,7 +720,7 @@ header.special h1 {
   padding: 0px 0 5px 90px;
   height: 80px;
   width: 250px;
-  margin-left: -40px;
+  margin-left: 0px;
   position: relative;
   background: #fff;
   transition: all 1000ms ease-out;

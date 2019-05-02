@@ -7,6 +7,118 @@
 	<title>Shopping cart</title>
 	<link rel="icon" href="./favicon.ico">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<style>
+		.add-to-list {
+			background: #fff;
+			border-radius: .5em;
+			padding: 1em;
+			display: inline-block;
+			width: auto;
+	}
+	
+	.add-to-list li {
+			list-style: none;
+			background: #d1703c;
+			border-bottom: 0 solid #fff;
+			color: #fff;
+			height: 0;
+			padding: 0 .5em;
+			margin: 0;
+			overflow: hidden;
+			line-height: 2em;
+			width: 10em;
+	}
+	
+	.add-to-list li:hover {
+			cursor: crosshair
+	}
+	
+	.add-to-list li.show {
+			height: 2em;
+			border-width: 2px;
+			opacity: 1;
+	}
+	
+	.fade {
+			-webkit-transition: all .4s ease-out;
+			transition: all .4s ease-out;
+			opacity: 0;
+			height: 2em
+	}
+	
+	.add-to-list.fade li.show {
+			opacity: 1
+	}
+	
+	.slide-fade {
+			-webkit-transition: all .4s ease-out;
+			transition: all .4s ease-out;
+			opacity: 0
+	}
+	
+	.add-to-list.slide-fade li.show {
+			opacity: 1
+	}
+	
+	.swing {
+			-webkit-perspective: 100px;
+			perspective: 100px;
+	
+			opacity: 0;
+			-webkit-transform: rotateX(-90deg);
+			transform: rotateX(-90deg);
+			-webkit-transition: all .5s cubic-bezier(.36, -.64, .34, 1.76);
+			transition: all .5s cubic-bezier(.36, -.64, .34, 1.76);
+	}
+	
+	.show-swing {
+			opacity: 1;
+			-webkit-transform: none;
+			transform: none;
+			-webkit-transition: all .5s cubic-bezier(.36, -.64, .34, 1.76);
+			transition: all .5s cubic-bezier(.36, -.64, .34, 1.76)
+	}
+	
+	.add-to-list.swing-side {
+			-webkit-perspective: 200px;
+			perspective: 200px
+	}
+	
+	.add-to-list.swing-side li {
+			-webkit-transform: rotateY(-90deg);
+			transform: rotateY(-90deg);
+			-webkit-transition: all .5s cubic-bezier(.36, -.64, .34, 1.76);
+			transition: all .5s cubic-bezier(.36, -.64, .34, 1.76)
+	}
+	
+	.add-to-list.swing-side li.show {
+			opacity: 1;
+			-webkit-transform: none;
+			transform: none;
+			-webkit-transition: all .5s cubic-bezier(.36, -.64, .34, 1.76);
+			transition: all .5s cubic-bezier(.36, -.64, .34, 1.76)
+	}
+	.cart-qty {
+		background: #ff5252;
+		border-radius: 50%;
+		color: #fff;
+		display: none;
+		font-size: .5em;
+		line-height: 25px;
+		position: absolute;
+		text-align: center;
+		top: 11px;
+		right: 10px;
+		height: 25px;
+		width: 25px;
+	}	
+
+	.cart-not-empty {
+		display: block;
+	}	
+	
+	</style>
 </head>
 
 <body>
@@ -16,7 +128,7 @@
 		<label class='label' for="menu-trigger">
 			<i class="fas fa-bars"></i>
 		</label>
-		<span class="cart" id="cart-toggle"><i class="fas fa-cart-plus"></i></span>
+		<span class="cart" id="cart-toggle"><i class="fas fa-cart-plus"></i><span class="cart-qty"></span></span>
 
 		<ul class="nav-menu">
 			<li class="nav-item"><a href="#">Home</a></li>
@@ -30,36 +142,27 @@
 		<span style="font-size: 48px; color: Dodgerblue;">
 			<i class="fas fa-igloo"></i>
 		</span>
-		<h1 id="hell">DOM Manipulations</h1>
+		<h1 id="hell">Animations</h1>
 	</header>
 
 	<div class="container">
-		<div id="main" class="card card-body">
+		<div id="main" class="card card-body add-to-list">
 			<h2 class="title">Add Items</h2>
 			<form class="form-inline mb-3">
 				<input type="text" class="form-control mr-2">
-				<input type="submit" class="btn btn-dark" value="Submit">
+				<button id="add-to-list">Add a list item</button>
+
 			</form>
-			<h2 class="title">Items</h2>
+			
 			<ul id="items" class="list-group">
-				<li class="list-group-item">Item 1</li>
-				<li class="list-group-item">Item 2</li>
-				<li class="list-group-item">Item 3</li>
-				<li class="list-group-item">Item 4</li>
+				<li class="show">Item 1</li>
+				<li class="show">Item 2</li>
+				<li class="show">Item 3</li>
+				<li class="show">Item 4</li>
 			</ul>
 
 			<div id="output"></div>
 			<br>
-			<div class="hello">Hi</div>
-			<div class="goodbye">Bye</div>
-
-			<table>
-				<tr class="table-row">
-				<template id="cells-to-repeat">
-					<td>Some content in Template</td>
-				</template>
-				</tr>
-			</table>
 				
 			<button class="btn btn-dark btn-block" id="button">Click Here</button>
 			<br>
@@ -116,15 +219,6 @@
 	<!-- End section footer -->
 
 	<script src=./js/index.js async defer></script>
-
-
-	<script id="template-item" type="text/template">
-
-		<div class="welcome">
-			<p class="welcome__message">Hello There!</p>
-		</div>
-
-    </script>
 
 
 </body>

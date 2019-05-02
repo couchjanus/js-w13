@@ -184,3 +184,46 @@
 	font-weight: 700;
 	border-radius: 10px;
 }
+
+
+.rotate-x {
+    -webkit-animation-duration: .6s;
+            animation-duration: .6s;
+    -webkit-animation-name: rotate-x;
+            animation-name: rotate-x;
+  }
+  
+  @-webkit-keyframes rotate-x {
+    from {
+      -webkit-transform: rotateY(0deg);
+              transform: rotateY(0deg);
+    }
+    to {
+      -webkit-transform: rotateY(360deg);
+              transform: rotateY(360deg);
+    }
+  }
+  
+  @keyframes rotate-x {
+    from {
+      -webkit-transform: rotateY(0deg);
+              transform: rotateY(0deg);
+    }
+    to {
+      -webkit-transform: rotateY(360deg);
+              transform: rotateY(360deg);
+    }
+  }
+  
+
+
+.offset-img {
+    // opacity: 0.5;
+    position: absolute;
+    z-index: 100;
+    left: 0;
+    top: 0;
+    height:150px;
+    width:150px;
+}
+

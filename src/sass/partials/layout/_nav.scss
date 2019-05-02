@@ -47,6 +47,26 @@
     }
 }
 
+
+.cart-qty {
+    background: #ff5252;
+    border-radius: 50%;
+    color: #fff;
+    display: none;
+    font-size: .5em;
+    line-height: 25px;
+    position: absolute;
+    text-align: center;
+    top: 11px;
+    right: 10px;
+    height: 25px;
+    width: 25px;
+}	
+
+.cart-not-empty {
+    display: block;
+}
+
 @media (max-width: 700px) {
 
     .nav-menu {

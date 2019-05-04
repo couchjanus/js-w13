@@ -2,8 +2,8 @@
 
 import '../sass/main.scss';
 
-import './test';
+// import './test';
 // import './testjq';
 // import './app';
-// import './appjq';
+import './appjq';
 // import './calc';

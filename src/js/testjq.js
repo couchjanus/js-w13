@@ -3,57 +3,31 @@
 import $ from 'jquery';
 window.jQuery = window.$ = $;
 
-var shoppingCart = [];
 
-// function openCart(){
-//     showCart(shoppingCart);
-//     $('.aside').addClass('open');
-//     $(".backdrop").addClass("backdrop--open");
-// }
+$('.btnGo').on('click', function () {
+	// ==============Создаём запрос====================
+	$.ajax({
+			url: 'http://jsonplaceholder.typicode.com/todos/1',
+			beforeSend: function () {
+				$('#console').html('<div class="alert alert-secondary" role="alert">1: Подготовка к отправке...</div>');
+			}
+		})
+		.fail(function (xhr, statusText) {
+			$('#console').html('<div class="alert alert-danger" role="alert">Ошибка: сервер вернул статус: ' + statusText + '</div>');
+			$("#printResult").html("<b>Error: " + statusText + "</b>");
+		})
+		.done(function (data) {
+			var text = $('#console').html();
+			$('#console').html(text + '<div class="alert alert-success" role="alert">4: Обмен завершен!</div>');
+			
+		})
+		.always(function (data) {
+			var text = $('#console').html();
+			$('#console').html(text + '<div class="alert alert-success" role="alert">5: All Done!</div>');
+			$("#printResult").html("<b>Прибыли данные: </b>" + JSON.stringify(data));
+			if (console && console.log) {
+				console.log("Sample of data:", data);
+			}
+		});
 
-// function closeCart(){
-//     $(".aside").removeClass("open");
-//     $(".backdrop").removeClass("backdrop--open");
-// }
-
-// $("#cart-toggle").on('click', () => openCart());
-// $(".toggle-sidebar").on('click', () => closeCart());
-
-
-// JQuery
-
-// $('.add-to-cart').each(function(index, element) {
-// 	$(element).on('click', () => {
-// 		let id = $(this).parents('.product-wrapper').attr('productId');
-// 		console.log(id);
-// 		let price = $(this).parents('.product-menu').find('.product-price').text();
-// 		console.log(price);
-// 		let name = $(this).parents('.product').children('.product-name').text();
-// 		console.log(name);
-// 		let quantity = $(this).parents('.product-menu').find('.quantity').val();
-// 		console.log(quantity);
-// 		let picture = $(this).parents('.product').find('img').attr('src');
-// 		console.log(picture);
-
-// 		let item = {
-// 			Id: id,
-// 			Product: name,
-// 			Price: price,
-// 			Quantity: quantity,
-// 			Picture: picture
-// 		};
-// 		console.log(item);
-
-// 		shoppingCart.push(item);
-
-// 		saveCart(shoppingCart);
-// 	});
-// });
-
-// ========================Очистка всего хранилища======================
-// $('body').on('click', '#cart-sidebar .clear-cart', function() {
-// 	localStorage.removeItem('shoppingCart');
-// 	$('.cart-items').empty();
-// 	shoppingCart = [];
-// });
-
+});

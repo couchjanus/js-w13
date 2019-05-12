@@ -9,11 +9,13 @@ function makeProductItem($template, product) {
     return $template;
 }
 
+
 function el(selector) {
     return document.querySelector(selector);
 }
 
-function openCart() {
+function openCart(shoppingCart) {
+    showCart(shoppingCart);
     el('.aside').classList.add('open');
     el('.backdrop').classList.add('backdrop--open');
 }
@@ -31,12 +33,51 @@ function _translate(img, offset=0){
     return elements.join('');
 }
 
+
+function saveCart(shoppingCart) {
+    // Store data
+    localStorage.shoppingCart = JSON.stringify(shoppingCart);
+    console.log(JSON.stringify(shoppingCart));
+}
+
+const content = document.getElementById("cartItem").content;
+
+
+
+// ==============addProductToCart====================
+            let productInCart = function (content, item){
+                content.querySelector('.item-name').textContent = item.Product;
+                content.querySelector('.item-quantity').textContent = item.Quantity;
+                content.querySelector('.item-price').textContent = item.Price;
+                content.querySelector('.item-img img').setAttribute('src', item.Picture);
+                return content;
+            }
+
+            
+function showCart(shoppingCart) {
+    if (shoppingCart.length == 0) {
+        console.log("Your Shopping Cart is Empty!");
+        return;
+    }
+    el(".cart-items").innerHTML='';
+
+    shoppingCart.forEach(function (item) {
+        el('.cart-items').append(document.importNode(productInCart(content, item), true));
+
+    });
+}
+
+
 const url = 'https://api.myjson.com/bins/wzxxy';
+
+
+var shoppingCart = [];
+
 // ------------------APP-------------------------
 (function() {
     el('#cart-toggle').addEventListener('click', function(e) {
         e.preventDefault();
-        openCart();
+        openCart(shoppingCart);
     }, false);
     el('.toggle-sidebar').addEventListener('click', function(e) {
         e.preventDefault();
@@ -46,14 +87,18 @@ const url = 'https://api.myjson.com/bins/wzxxy';
     // Контент шаблона
     const $template = document.getElementById("productItem").content;
 
+     
+    if (localStorage.shoppingCart) {
+        shoppingCart = JSON.parse(localStorage.shoppingCart);
+    }
+
     fetch(url)
-    .then(
-        function (response) {
+    .then( (response) => {
             if (response.status !== 200) {
                     console.log('Looks like there was a problem. Status Code: ' + response.status);
                     return;
             }
-            response.json().then(function (data) {
+            response.json().then( (data) => {
                 data.forEach(function (index) {
                         document.querySelector('.main').append(makeProductItem($template, index).cloneNode(true));
                 });
@@ -95,21 +140,29 @@ const url = 'https://api.myjson.com/bins/wzxxy';
                     this.nextElementSibling.setAttribute('value', val - 1);
                 });
             });
-            // ==============addProductToCart====================
-            let addProductToCart = function (content, item){
-                content.querySelector('.item-name').textContent = item.querySelector(".product-name").textContent;
-                content.querySelector('.item-quantity').textContent = item.querySelector(".quantity").value;
-                content.querySelector('.item-price').textContent = item.querySelector(".product-price").textContent;
-                content.querySelector('.item-img img').setAttribute('src', item.querySelector(".product-picture img").getAttribute('src'));
-                return content;
+            
+
+            let addProductToCart = function (item) {
+                let id = item.parentNode.getAttribute("productId");
+                let price = item.querySelector(".product-price").textContent;
+                let name = item.querySelector(".product-name").textContent;
+                let quantity = item.querySelector(".quantity").value;
+                let picture = item.querySelector(".product-picture img").getAttribute('src');
+                return {id, price, name, quantity, picture};
             }
-            const content = document.getElementById("cartItem").content;
+            
+
+            
             const carts = Array.from(document.getElementsByClassName('add-to-cart'));
             
             carts.forEach(function (cart) {
                 cart.addEventListener('click', function (e) {
                     e.preventDefault();
                     let item = e.target.parentNode.parentNode.parentNode;
+                    let {id, price, name, quantity, picture} = addProductToCart(item);
+
+
+
                     var imgToDrag = item.querySelector("img");
 
                     if (imgToDrag) {
@@ -119,8 +172,7 @@ const url = 'https://api.myjson.com/bins/wzxxy';
 
                         item.parentNode.querySelector('.product-wrapper').style.transform = 'rotateY(180deg)';
                         item.parentNode.querySelector('.product-back').classList.add('back-is-visible');
-                        el('.cart-items').append(document.importNode(addProductToCart(content, item), true));
-
+                        
                         imgClone.animate([{
                                 transform: _translate(imgToDrag)
                             },
@@ -150,6 +202,25 @@ const url = 'https://api.myjson.com/bins/wzxxy';
                             cardQty.classList.add("rotate-x");
                         };
                     }
+
+                    for (let i in shoppingCart) {
+                        if (shoppingCart[i].Id == id) {
+                            shoppingCart[i].Quantity = parseInt(shoppingCart[i].Quantity) + parseInt(quantity);
+                            saveCart(shoppingCart);
+                            return;
+                        }
+                    }
+        
+                    let pitem = {
+                        Id: id,
+                        Product: name,
+                        Price: price,
+                        Quantity: quantity,
+                        Picture: picture
+                    };
+        
+                    shoppingCart.push(pitem);
+                    saveCart(shoppingCart);
                 });
             // =================Очистка всего хранилища================
 
@@ -172,7 +243,8 @@ const url = 'https://api.myjson.com/bins/wzxxy';
             });
         });
     })
-    .catch(function (err) {
+    .catch( (err) => {
         console.log('Fetch Error :-S', err);
     });
 })();
+
